@@ -1,19 +1,27 @@
 import { useState } from 'react'
-import bookLogo from './assets/books.png'
+import {Route, Routes} from 'react-router-dom'
+import BookList from './components/BookList'
+import SingleBook from './components/SingleBook'
+import Nav from './components/Nav'
 
 function App() {
-  const [token, setToken] = useState(null)
+  const [books, setBooks] = useState([])
+  const [book, setBook] = useState({})
 
   return (
     <>
-      <h1><img id='logo-image' src={bookLogo}/>Library App</h1>
+    <div>
+      <Nav />
+    </div>
 
-      <p>Complete the React components needed to allow users to browse a library catalog, check out books, review their account, and return books that they've finished reading.</p>
-
-      <p>You may need to use the `token` in this top-level component in other components that need to know if a user has logged in or not.</p>
-
-      <p>Don't forget to set up React Router to navigate between the different views of your single page application!</p>
+    <div>
+    <Routes>
+      <Route path="/" element={<BookList books={books} setBooks={setBooks} />} />
+      <Route path="/SingleBook/:id" element={<SingleBook  book={book} setBook={setBook} books={books} setBooks={setBooks}/> } />
+    </Routes>
+    </div>
     </>
+
   )
 }
 
