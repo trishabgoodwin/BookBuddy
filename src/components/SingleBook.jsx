@@ -1,7 +1,9 @@
  import { useState, useEffect } from "react";
- import { useParams } from "react-router-dom";
+ import { useParams, useNavigate } from "react-router-dom";
 
- function SingleBook({book, setBook}){
+ function SingleBook({token, setToken, book, setBook}){
+
+  const [reserved, setReserved] = useState([])
 
     const {id} = useParams()
 
@@ -16,6 +18,30 @@
             console.log(book)
           },[])
 
+    const handleReserve = async () => {
+      if (!token){
+        alert("You cannot reserve books unless you are a user!")
+      }
+      try{
+        const response = await fetch("https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations",
+            {
+                method: "POST",
+                headers:{
+                  "Content-type": "application/json",
+                  Authorization: `Bearer ${token}`
+              },
+              body: JSON.stringify({
+                bookId:book.id,
+              })
+        });
+            const result = await response.json()
+            setReserved(result)
+            alert("Book successfully reserved! Go to your account to see reserved books.")
+    }catch(error){
+        console.log(error)
+    }}
+
+          
     return(
         <>
         <h1>{book.title}</h1>
@@ -23,6 +49,7 @@
         <p>Author: {book.author}</p>
         <p>Description: {book.description}</p>
         <p>Availability: {book.available ? "Available" : "Not Available"}</p>
+        <button onClick={handleReserve}>Reserve</button>
         </>
     )
  }

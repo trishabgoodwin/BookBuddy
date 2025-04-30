@@ -32,7 +32,7 @@ function Account({token}){
         <div>
             <h1>Hi {auth?.firstname}</h1>
             <h2>Your email is {auth?.email}</h2>
-            <h2>Your reservations include: {auth?.reservations}</h2>
+            <h2>{auth?.reservations?.title}</h2>
         </div>
         :
         <h2>You are not signed in! Please sign up!</h2>    
