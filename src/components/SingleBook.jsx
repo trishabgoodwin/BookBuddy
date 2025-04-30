@@ -5,8 +5,6 @@
 
     const {id} = useParams()
 
-
-
         useEffect(()=>{
             const getBook = async () =>{
               const res = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${id}`)
@@ -23,8 +21,8 @@
         <h1>{book.title}</h1>
         <img src={book?.coverimage} style={{height:"200px"}}/>
         <p>Author: {book.author}</p>
-        <p>{book.description}</p>
-        <p>{book.availability}</p>
+        <p>Description: {book.description}</p>
+        <p>Availability: {book.available ? "Available" : "Not Available"}</p>
         </>
     )
  }

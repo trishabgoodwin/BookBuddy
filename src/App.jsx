@@ -5,6 +5,7 @@ import SingleBook from './components/SingleBook'
 import Nav from './components/Nav'
 import Register from './components/Register'
 import Login from './components/Login'
+import Account from './components/Account'
 
 function App() {
   const [books, setBooks] = useState([])
@@ -23,6 +24,7 @@ function App() {
       <Route path="/SingleBook/:id" element={<SingleBook  book={book} setBook={setBook} books={books} setBooks={setBooks}/> } />
       <Route path="/Register" element={<Register token={token} setToken={setToken} />}/>
       <Route path="/Login" element={<Login token={token} setToken={setToken} />} />
+      <Route path="/Account" element={<Account token={token} setToken={setToken} />} />
     </Routes>
     </div>
     </>
