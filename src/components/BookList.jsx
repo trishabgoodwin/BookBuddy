@@ -13,7 +13,6 @@ function BookList({books, setBooks}) {
           const data = await res.json()
     
           setBooks(data)
-    
         }
     
         getBooks();
@@ -26,49 +25,47 @@ function BookList({books, setBooks}) {
           navigate(`/SingleBook/${book.id}`);
         };
 
-        const handleSearch = (event) => {
+      const handleSearch = (event) => {
             const searchTerm = event.target.value;
             setSearchTerm(searchTerm);
           
-            const filteredResults = books.filter(item =>
-              Object.values(item).some(value =>
-                typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())
-              )
+            const results = books.filter(book =>
+              book.title.toLowerCase().includes(searchTerm.toLowerCase())
             );
-            setSearchResults(filteredResults);
+            setBooks(results);
           };
 
-          const handleClear = () => {
+      const handleClear = () => {
             setSearchTerm('');
-            setSearchResults([]);
+            setBooks(books);
           };
+
+          
 
 return(
     <>
     <div>
         <h1>Book Buddy</h1>
-        <p>Here are the books in our catalogue:</p>
+        <p>Browse the books in our catalogue. Click "Details" to learn more.<br/>
+            Sign up or login to reserve books and to see your reservations.</p>
         <div>
+        <p>You can search for a book title here:</p>
         <input
         type="text"
         placeholder="Search..."
         value={searchTerm}
         onChange={handleSearch}
          />
+        </div>
         <div>
-        <button onClick={handleClear}>Clear</button>
+        <button onClick={handleClear}>Reset</button>
         </div>
         <div>
         <ul>
-        {searchResults.map(item => (
-          <li key={item.id}>{}
-          {Object.entries(item).map(([key, value]) => (
-              <p key={key}>{key}: {value}</p>
+        {searchResults.map((book) => (
+              <li key={book.id}>{book.title}</li>          
             ))}
-          </li>
-         ))}
         </ul>
-        </div>
         </div>
     </div>
    {

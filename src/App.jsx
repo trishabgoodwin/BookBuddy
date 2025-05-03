@@ -10,7 +10,9 @@ import Account from './components/Account'
 function App() {
   const [books, setBooks] = useState([])
   const [book, setBook] = useState({})
+  const [auth, setAuth] = useState([])
   const [token, setToken] = useState(localStorage.getItem("token") || null)
+
 
   return (
     <>
@@ -21,10 +23,10 @@ function App() {
     <div>
     <Routes>
       <Route path="/" element={<BookList books={books} setBooks={setBooks} />} />
-      <Route path="/SingleBook/:id" element={<SingleBook  token={token} setToken={setToken} book={book} setBook={setBook} books={books} setBooks={setBooks}/> } />
+      <Route path="/SingleBook/:id" element={<SingleBook  token={token} setToken={setToken} book={book} setBook={setBook} books={books} setBooks={setBooks} auth={auth} setAuth={setAuth}/> } />
       <Route path="/Register" element={<Register token={token} setToken={setToken} />}/>
       <Route path="/Login" element={<Login token={token} setToken={setToken} />} />
-      <Route path="/Account" element={<Account token={token} setToken={setToken} />} />
+      <Route path="/Account" element={<Account token={token} setToken={setToken} books={books} auth={auth} setAuth={setAuth} />} />
     </Routes>
     </div>
     </>
