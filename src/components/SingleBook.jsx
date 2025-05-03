@@ -1,11 +1,11 @@
  import { useState, useEffect } from "react";
  import { useParams, useNavigate } from "react-router-dom";
 
- function SingleBook({token, setToken, book, setBook}){
+ function SingleBook({token, book, setBook}){
 
   const [reserved, setReserved] = useState([])
 
-    const {id} = useParams()
+  const {id} = useParams()
 
         useEffect(()=>{
             const getBook = async () =>{
@@ -38,8 +38,9 @@
             setReserved(result)
             alert("Book successfully reserved! Go to your account to see reserved books.")
     }catch(error){
-        console.log(error)
+        console.log(error);
     }}
+
 
           
     return(
@@ -49,7 +50,11 @@
         <p>Author: {book.author}</p>
         <p>Description: {book.description}</p>
         <p>Availability: {book.available ? "Available" : "Not Available"}</p>
+        <div>
+          {token &&
         <button onClick={handleReserve}>Reserve</button>
+          }
+        </div>
         </>
     )
  }
