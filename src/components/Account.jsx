@@ -30,9 +30,6 @@ function Account({token, auth, setAuth}){
     const {id} = useParams()
 
     const handleReturn = async () => {
-        if (!token){
-          alert("You cannot reserve books unless you are a user!")
-        }
         try{
           const response = await fetch((`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations/${id}`),
               {
@@ -42,7 +39,7 @@ function Account({token, auth, setAuth}){
                     Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                  id : auth.reservations?.id,
+                  id : auth.reservations?.id
                 })
           });
               const result = await response.json()
@@ -55,17 +52,17 @@ function Account({token, auth, setAuth}){
         <>
         {token ?
         <div>
-            <div>
-            <h1>Hi {auth.firstname}!</h1>
-            <h2>Your email is: {auth.email}</h2>
+            <div className="accountgreet">
+                <h1>Hi {auth.firstname}!</h1>
+                 <h2>Your email is: {auth.email}</h2>
             </div>
             <div>
                 <p>Reserved Books:</p>
                 <div>
                     <ul>
                     {auth.reservations?.map((book) => (
-                    <li key={book.id}>
-                        {book.title}
+                    <li className="resbook" key={book.id}>
+                        {book.title} <br/>
                         <button onClick={() => handleReturn(auth.reservations?.id)}>Delete</button>
                     </li>          
                      ))}

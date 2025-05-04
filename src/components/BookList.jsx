@@ -44,33 +44,40 @@ function BookList({books, setBooks}) {
 
 return(
     <>
-    <div>
-        <h1>Book Buddy</h1>
-        <p>Browse the books in our catalogue. Click "Details" to learn more.<br/>
+      <div className="greeting">
+        <div>
+          <h1>Book Buddy</h1>
+        </div>
+        <div>
+          <p>Browse the books in our catalogue. Click "Details" to learn more.<br/>
             Sign up or login to reserve books and to see your reservations.</p>
-        <div>
-        <p>You can search for a book title here:</p>
-        <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleSearch}
-         />
         </div>
         <div>
-        <button onClick={handleClear}>Reset</button>
+          <p>You can search for a book title here:</p>
+        </div>
+        <div>  
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleSearch}
+            />
         </div>
         <div>
-        <ul>
-        {searchResults.map((book) => (
+          <button onClick={handleClear}>Reset</button>
+        </div> 
+        <div>
+          <ul>
+            {searchResults.map((book) => (
               <li key={book.id}>{book.title}</li>          
             ))}
-        </ul>
+          </ul>
         </div>
-    </div>
-   {
+      </div>
+  <div className="allbooks">
+      {
             books.map((book)=>
-                <div key={book.id}>
+                <div key={book.id} className="book">
                     <h3>{book.title}</h3>
                     <img src={book?.coverimage} style={{height:"200px"}}/>
                     <div>
@@ -78,8 +85,9 @@ return(
                     </div>
                 </div>
             )
-        }
-    </>
+       }
+    </div>
+  </>
     )
 
 }
