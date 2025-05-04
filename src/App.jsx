@@ -20,7 +20,7 @@ function App() {
       <Nav />
     </div>
 
-    <div>
+    <div className="homepage">
     <Routes>
       <Route path="/" element={<BookList books={books} setBooks={setBooks} />} />
       <Route path="/SingleBook/:id" element={<SingleBook  token={token} setToken={setToken} book={book} setBook={setBook} books={books} setBooks={setBooks} auth={auth} setAuth={setAuth}/> } />

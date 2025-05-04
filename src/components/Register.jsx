@@ -6,7 +6,7 @@ function Register({token, setToken}){
     const [password, setPassword] = useState ('')
     const [firstname , setFirstname] = useState ('')
     const [lastname , setLastname] = useState ('')
-    const [error, setError] =useState ("")
+    const [error, setError] = useState ("")
 
     async function handleSubmit(event){
         event.preventDefault();
