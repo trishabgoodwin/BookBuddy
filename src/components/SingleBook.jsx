@@ -35,8 +35,11 @@
               })
         });
             const result = await response.json()
-            setReserved(result)
-            alert("Book successfully reserved! Go to your account to see reserved books.")
+            if(!response.ok) {
+              alert("This book cannot be reserved currently. Check availability and try again later.");
+           }else{
+            alert("Book successfully reserved! Go to your account to see reserved books.")}
+            setReserved(result);
     }catch(error){
         console.log(error);
     }}
