@@ -1,18 +1,22 @@
 import { useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 function BookList({books, setBooks}) {
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+    const [fullBookList, setFullBookList] = useState([]);
+    const location = useLocation();
 
+    
     useEffect(()=>{
         const getBooks = async () =>{
           const res = await fetch("https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books")
           const data = await res.json()
     
-          setBooks(data)
+          setBooks(data);
+          setFullBookList(data);
+
         }
     
         getBooks();
@@ -29,7 +33,7 @@ function BookList({books, setBooks}) {
             const searchTerm = event.target.value;
             setSearchTerm(searchTerm);
           
-            const results = books.filter(book =>
+            const results = fullBookList.filter(book =>
               book.title.toLowerCase().includes(searchTerm.toLowerCase())
             );
             setBooks(results);
@@ -37,10 +41,16 @@ function BookList({books, setBooks}) {
 
       const handleClear = () => {
             setSearchTerm('');
-            setBooks(books);
-          };
+            setBooks(fullBookList);
+          };    
+         
+      useEffect(() => {
+            if (location.pathname === '/') {
+              setBooks(fullBookList); 
+              setSearchTerm('');
+            }
+          }, [location]);
 
-          
 
 return(
     <>
@@ -66,15 +76,8 @@ return(
         <div>
           <button onClick={handleClear}>Reset</button>
         </div> 
-        <div>
-          <ul>
-            {searchResults.map((book) => (
-              <li key={book.id}>{book.title}</li>          
-            ))}
-          </ul>
-        </div>
       </div>
-  <div className="allbooks">
+    <div className="allbooks">
       {
             books.map((book)=>
                 <div key={book.id} className="book">

@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useParams, useLocation } from "react-router-dom"
 
 function Login({token,setToken}){
     const [email, setEmail] =useState("")
     const [password, setPassword] =useState("")
+    const location = useLocation();
 
     async function handleSubmit(event){
         event.preventDefault();
@@ -21,7 +23,10 @@ function Login({token,setToken}){
                 if (result.token){
                     localStorage.setItem("token", result.token)
                     setToken(result.token)
-
+                    alert("You are now logged in!");
+                    window.location.href= "/";
+                }else{
+                    alert("Error. Please try again, or sign up first!")
                 }
                 
         }catch(error){

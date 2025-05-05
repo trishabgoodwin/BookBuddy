@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import {Route, Routes} from 'react-router-dom'
+import {Route, Routes, useLocation} from 'react-router-dom'
 
 function Register({token, setToken}){
     const [email, setEmail] = useState ('')
@@ -26,10 +26,17 @@ function Register({token, setToken}){
                 console.log(result);
                 setToken(result.token)
                 console.log(token);
+                if(result){
+                    alert("You are Registered! Please Login!");
+                    window.location.href= "/Login";
+                }else{
+                    alert("Error. Please try again.")
+                };
 
         }catch(error){
             console.log(error)
             setError(error.response?.data?.message || 'Network error. Please try again.');
+
         }
     }
 
