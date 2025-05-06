@@ -23,9 +23,7 @@ function Register({token, setToken}){
                 })
             });
                 const result = await response.json()
-                console.log(result);
                 setToken(result.token)
-                console.log(token);
                 if(result){
                     alert("You are Registered! Please Login!");
                     window.location.href= "/Login";
