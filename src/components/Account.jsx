@@ -18,7 +18,6 @@ function Account({token, auth, setAuth}){
                 }
             })
             const result = await response.json()
-            console.log(result);
 
             setAuth(result);
 
@@ -43,7 +42,6 @@ function Account({token, auth, setAuth}){
                     }
                 })
                 const result = await response.json()
-                console.log(result);
     
                 setReservations(result);
     

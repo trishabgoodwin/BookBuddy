@@ -15,7 +15,6 @@
             }
         
             getBook();
-            console.log(book)
           },[])
 
     const handleReserve = async () => {
